@@ -31,11 +31,11 @@ function startGame() {
   blanksAndSuccesses = [];
   wrongGuesses = [];
   blanksAndSuccesses = Array(numBlanks).fill("_");
-  document.getElementById("hint").innerHTML = "Hint:" + " " + wordHint;
-  document.getElementById("guesses-left").innerHTML = numGuesses;
-  document.getElementById("word-blanks").innerHTML =
-    blanksAndSuccesses.join(" ");
-  document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
+
+  $("#hint").innerHTML = "Hint:" + " " + wordHint;
+  $("#guesses-left").innerHTML = numGuesses;
+  $("#word-blanks").innerHTML = blanksAndSuccesses.join(" ");
+  $("#wrong-guesses").innerHTML = wrongGuesses.join(" ");
 }
 
 function checkLetters(letter) {
@@ -60,27 +60,27 @@ function checkLetters(letter) {
 }
 
 function roundComplete() {
-  document.getElementById("guesses-left").innerHTML = numGuesses;
-  document.getElementById("word-blanks").innerHTML =
-    blanksAndSuccesses.join(" ");
-  document.getElementById("wrong-guesses").innerHTML = wrongGuesses.join(" ");
+  $("#guesses-left").innerHTML = numGuesses;
+  $("#word-blanks").innerHTML = blanksAndSuccesses.join(" ");
+  $("#wrong-guesses").innerHTML = wrongGuesses.join(" ");
 
   if (lettersInChosenWord.toString() === blanksAndSuccesses.toString()) {
     winCounter++;
     alert("You win!");
-    document.getElementById("win-counter").innerHTML = winCounter;
+    $("#win-counter").innerHTML = winCounter;
     startGame();
   } else if (numGuesses === 0) {
     lossCounter++;
     alert("You lose");
-    document.getElementById("loss-counter").innerHTML = lossCounter;
+    $("#loss-counter").innerHTML = lossCounter;
     startGame();
   }
 }
 
 startGame();
-document.onkeyup = (event) => {
+
+document.addEventListener("keyup", (event) => {
   let letterGuessed = event.key.toLowerCase();
   checkLetters(letterGuessed);
   roundComplete();
-};
+});
